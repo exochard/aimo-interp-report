@@ -1,0 +1,16 @@
+{
+  "id": "giuseppecastelluccio/aimo-gen-olmo-3-7b-think",
+  "title": "aimo-gen-olmo-3-7b-think",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaL4"
+}

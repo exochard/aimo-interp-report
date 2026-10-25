@@ -1,0 +1,37 @@
+{
+ "rows": 34,
+ "with_features": 34,
+ "probe": {
+  "correct": 22,
+  "n": 34,
+  "accuracy": 0.6470588235294118,
+  "balanced": 0.4583333333333333
+ },
+ "majority": {
+  "correct": 24,
+  "n": 34,
+  "accuracy": 0.7058823529411765,
+  "balanced": 0.5
+ },
+ "calibration_correct": 25,
+ "drop_one_group_margin_min": -6,
+ "family_holdout": {
+  "correct": 24,
+  "n": 34,
+  "accuracy": 0.7058823529411765,
+  "balanced": 0.5
+ },
+ "family_majority": {
+  "correct": 24,
+  "n": 34,
+  "accuracy": 0.7058823529411765,
+  "balanced": 0.5
+ },
+ "gate": {
+  "accuracy": false,
+  "margin": false,
+  "balanced": false,
+  "drop_one_group": false
+ },
+ "pass": false
+}

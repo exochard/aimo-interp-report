@@ -1,0 +1,342 @@
+{
+ "rows": 34,
+ "problems": 20,
+ "models": 4,
+ "true_rate": 0.7059,
+ "stability_features_used": [],
+ "stability_features_missing": [
+  "orig_consistency",
+  "agree_typos",
+  "agree_distract",
+  "drop_typos",
+  "drop_distract",
+  "dlogprob_typos",
+  "dlogprob_distract"
+ ],
+ "arms_offered": [
+  "ability",
+  "ability+difficulty",
+  "ability+covariates",
+  "ability+difficulty+covariates",
+  "ability+difficulty+sensitivity"
+ ],
+ "grid": {
+  "k": [
+   1.0,
+   4.0,
+   16.0
+  ],
+  "C": [
+   0.1,
+   1.0,
+   10.0
+  ]
+ },
+ "control_combined_prompt": {
+  "correct": 23,
+  "accuracy": 0.6765,
+  "balanced": 0.5667
+ },
+ "problem_holdout": {
+  "majority": {
+   "correct": 24,
+   "accuracy": 0.7059,
+   "balanced": 0.5
+  },
+  "per_model_majority": {
+   "correct": 24,
+   "accuracy": 0.7059,
+   "balanced": 0.5
+  },
+  "selected": {
+   "correct": 25,
+   "accuracy": 0.7353,
+   "balanced": 0.5792
+  },
+  "selection_by_fold": [
+   {
+    "held_out": "sha256:2ca839cfbfc60e29",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 4.0,
+    "C": 1.0,
+    "inner_correct": 25,
+    "inner_rows": 32
+   },
+   {
+    "held_out": "sha256:d06c3e7f2d19047c",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 1.0,
+    "inner_correct": 25,
+    "inner_rows": 32
+   },
+   {
+    "held_out": "sha256:8cfb5ed3481065bd",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 26,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:a59a836b9807d87b",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 1.0,
+    "inner_correct": 24,
+    "inner_rows": 31
+   },
+   {
+    "held_out": "sha256:f3d7b78d243a1a50",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 26,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:f862f0368b2ad1a8",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 24,
+    "inner_rows": 31
+   },
+   {
+    "held_out": "sha256:26a263ad81138dbf",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 24,
+    "inner_rows": 31
+   },
+   {
+    "held_out": "sha256:0412b80ad1a49c53",
+    "arm": "ability+covariates",
+    "k": 1.0,
+    "C": 10.0,
+    "inner_correct": 26,
+    "inner_rows": 32
+   },
+   {
+    "held_out": "sha256:7443669f7e9038ec",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 10.0,
+    "inner_correct": 29,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:f02e2f6622643c8d",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 10.0,
+    "inner_correct": 28,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:7ee9d443789963a7",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 16.0,
+    "C": 1.0,
+    "inner_correct": 26,
+    "inner_rows": 30
+   },
+   {
+    "held_out": "sha256:45c5347414182113",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 10.0,
+    "inner_correct": 28,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:1c2bec482bb1617a",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 26,
+    "inner_rows": 32
+   },
+   {
+    "held_out": "sha256:cba4eb5fe5dc6660",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 1.0,
+    "inner_correct": 26,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:b0cb8396e37bc02b",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 16.0,
+    "C": 10.0,
+    "inner_correct": 26,
+    "inner_rows": 32
+   },
+   {
+    "held_out": "sha256:5e78de5d5cba59f5",
+    "arm": "ability+covariates",
+    "k": 4.0,
+    "C": 10.0,
+    "inner_correct": 27,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:11ff3e02ab225f8a",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 16.0,
+    "C": 10.0,
+    "inner_correct": 25,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:37172384f0dc9b88",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 16.0,
+    "C": 10.0,
+    "inner_correct": 27,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:3f55fba10d99fd16",
+    "arm": "ability",
+    "k": 1.0,
+    "C": 0.1,
+    "inner_correct": 24,
+    "inner_rows": 33
+   },
+   {
+    "held_out": "sha256:d47975ec2ba3a7dd",
+    "arm": "ability+difficulty+sensitivity",
+    "k": 1.0,
+    "C": 1.0,
+    "inner_correct": 25,
+    "inner_rows": 33
+   }
+  ],
+  "arm_counts": {
+   "ability": 1,
+   "ability+difficulty": 0,
+   "ability+covariates": 7,
+   "ability+difficulty+covariates": 0,
+   "ability+difficulty+sensitivity": 12
+  },
+  "descriptive_arms": {
+   "ability": {
+    "correct": 24,
+    "accuracy": 0.7059,
+    "balanced": 0.5
+   },
+   "ability+difficulty": {
+    "correct": 24,
+    "accuracy": 0.7059,
+    "balanced": 0.5
+   },
+   "ability+covariates": {
+    "correct": 23,
+    "accuracy": 0.6765,
+    "balanced": 0.4792
+   },
+   "ability+difficulty+covariates": {
+    "correct": 23,
+    "accuracy": 0.6765,
+    "balanced": 0.4792
+   },
+   "ability+difficulty+sensitivity": {
+    "correct": 26,
+    "accuracy": 0.7647,
+    "balanced": 0.6
+   }
+  }
+ },
+ "model_holdout": {
+  "majority": {
+   "correct": 24,
+   "accuracy": 0.7059,
+   "balanced": 0.5
+  },
+  "selected": {
+   "correct": 22,
+   "accuracy": 0.6471,
+   "balanced": 0.6042,
+   "per_family": {
+    "qwen3.5": {
+     "n": 12,
+     "correct": 5,
+     "train_majority_correct": 8,
+     "own_majority_correct": 8
+    },
+    "skywork-or1": {
+     "n": 3,
+     "correct": 2,
+     "train_majority_correct": 2,
+     "own_majority_correct": 2
+    },
+    "olmo3": {
+     "n": 9,
+     "correct": 7,
+     "train_majority_correct": 7,
+     "own_majority_correct": 7
+    },
+    "deepseek-r1-qwen3": {
+     "n": 10,
+     "correct": 8,
+     "train_majority_correct": 7,
+     "own_majority_correct": 7
+    }
+   },
+   "selection_by_fold": [
+    {
+     "held_out": "qwen3.5",
+     "arm": "ability+covariates",
+     "k": 4.0,
+     "C": 10.0,
+     "inner_correct": 18,
+     "inner_rows": 22
+    },
+    {
+     "held_out": "skywork-or1",
+     "arm": "ability+covariates",
+     "k": 16.0,
+     "C": 10.0,
+     "inner_correct": 24,
+     "inner_rows": 31
+    },
+    {
+     "held_out": "olmo3",
+     "arm": "ability",
+     "k": 1.0,
+     "C": 10.0,
+     "inner_correct": 20,
+     "inner_rows": 25
+    },
+    {
+     "held_out": "deepseek-r1-qwen3",
+     "arm": "ability+difficulty",
+     "k": 1.0,
+     "C": 1.0,
+     "inner_correct": 18,
+     "inner_rows": 24
+    }
+   ]
+  }
+ },
+ "gate": {
+  "selector": "arm, k and C chosen by leave-one-problem-out inside each outer training fold",
+  "oof_accuracy": 0.7353,
+  "accuracy_ok": false,
+  "net_vs_control": 2,
+  "margin_ok": false,
+  "paired_vs_control": {
+   "wins": 5,
+   "losses": 3,
+   "p_two_sided": 0.7266
+  },
+  "net_vs_majority": 1,
+  "note": "model-holdout difficulty reads other models' labels on the same problem, which a new problem would not have",
+  "family_ok": false,
+  "timing_path": "not measured: no perturbed-generation run exists yet",
+  "pass": false
+ }
+}

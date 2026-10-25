@@ -1,0 +1,13 @@
+@page { size: A4; margin: 2.5cm; }
+body { font-family: serif; font-size: 11pt; line-height: 1.35; }
+h1 { font-size: 16pt; } h2 { font-size: 13pt; } h3 { font-size: 11.5pt; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #999; padding: 2px 5px; }
+code { font-size: 9pt; }
+table { width: 100%; }
+tr { page-break-inside: avoid; }
+thead { display: table-header-group; }
+div.results { break-inside: avoid; page-break-inside: avoid; }
+figure { margin: 0.4em 0; text-align: center; page-break-inside: avoid; }
+figure img { width: 95%; height: auto; }
+figcaption { font-size: 9pt; }

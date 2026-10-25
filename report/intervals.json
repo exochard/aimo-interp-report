@@ -1,0 +1,152 @@
+{
+ "rows": 34,
+ "problems": 20,
+ "same_rows": {
+  "majority": true,
+  "prompt:capability": true,
+  "prompt:sensitivity": true,
+  "prompt:combined": true,
+  "calibration (nested)": true,
+  "trace sensitivity": true,
+  "trace majority": true,
+  "hidden-activation probe": true,
+  "activation majority": true
+ },
+ "reproduced": {
+  "majority": {
+   "correct": 24,
+   "reported": 24,
+   "match": true
+  },
+  "prompt:capability": {
+   "correct": 23,
+   "reported": 23,
+   "match": true
+  },
+  "prompt:sensitivity": {
+   "correct": 24,
+   "reported": 24,
+   "match": true
+  },
+  "prompt:combined": {
+   "correct": 23,
+   "reported": 23,
+   "match": true
+  },
+  "calibration (nested)": {
+   "correct": 25,
+   "reported": 25,
+   "match": true
+  },
+  "trace sensitivity": {
+   "correct": 22,
+   "reported": 22,
+   "match": true
+  },
+  "trace majority": {
+   "correct": 24,
+   "reported": 24,
+   "match": true
+  },
+  "hidden-activation probe": {
+   "correct": 22,
+   "reported": 22,
+   "match": true
+  },
+  "activation majority": {
+   "correct": 24,
+   "reported": 24,
+   "match": true
+  }
+ },
+ "vs_majority": {
+  "prompt:capability": {
+   "correct": 23,
+   "majority": 24,
+   "difference": -1,
+   "method_right_majority_wrong": 0,
+   "majority_right_method_wrong": 1,
+   "interval95": [
+    -3.0,
+    0.0
+   ]
+  },
+  "prompt:sensitivity": {
+   "correct": 24,
+   "majority": 24,
+   "difference": 0,
+   "method_right_majority_wrong": 2,
+   "majority_right_method_wrong": 2,
+   "interval95": [
+    -4.0,
+    4.0
+   ]
+  },
+  "prompt:combined": {
+   "correct": 23,
+   "majority": 24,
+   "difference": -1,
+   "method_right_majority_wrong": 3,
+   "majority_right_method_wrong": 4,
+   "interval95": [
+    -6.0,
+    4.0
+   ]
+  },
+  "calibration (nested)": {
+   "correct": 25,
+   "majority": 24,
+   "difference": 1,
+   "method_right_majority_wrong": 2,
+   "majority_right_method_wrong": 1,
+   "interval95": [
+    -2.0,
+    4.0
+   ]
+  },
+  "trace sensitivity": {
+   "correct": 22,
+   "majority": 24,
+   "difference": -2,
+   "method_right_majority_wrong": 0,
+   "majority_right_method_wrong": 2,
+   "interval95": [
+    -5.0,
+    0.0
+   ]
+  },
+  "trace majority": {
+   "correct": 24,
+   "majority": 24,
+   "difference": 0,
+   "method_right_majority_wrong": 0,
+   "majority_right_method_wrong": 0,
+   "interval95": [
+    0.0,
+    0.0
+   ]
+  },
+  "hidden-activation probe": {
+   "correct": 22,
+   "majority": 24,
+   "difference": -2,
+   "method_right_majority_wrong": 0,
+   "majority_right_method_wrong": 2,
+   "interval95": [
+    -5.0,
+    0.0
+   ]
+  },
+  "activation majority": {
+   "correct": 24,
+   "majority": 24,
+   "difference": 0,
+   "method_right_majority_wrong": 0,
+   "majority_right_method_wrong": 0,
+   "interval95": [
+    0.0,
+    0.0
+   ]
+  }
+ }
+}

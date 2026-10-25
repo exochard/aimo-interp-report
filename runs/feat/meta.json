@@ -1,0 +1,38 @@
+{
+ "module_sha256": {
+  "perturb.py": "fc0ed3885b6cc355f4ff492f95162475163b1582f6b15457df2cc786cfffb62f",
+  "features.py": "989fd16d1b11605cb21d01fd8da60bd4dd3150d5955e42b9912cc856cf0966b5"
+ },
+ "transformers": "5.13.0",
+ "device": "cpu",
+ "rejected": {},
+ "models": {
+  "Skywork/Skywork-OR1-Math-7B": {
+   "load_s": 0.6,
+   "per_problem_s": 8.893,
+   "max_problem_s": 33.436,
+   "n": 9
+  },
+  "allenai/Olmo-3-7B-Think": {
+   "load_s": 80.1,
+   "per_problem_s": 408.876,
+   "max_problem_s": 598.438,
+   "n": 9
+  },
+  "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": {
+   "load_s": 108.8,
+   "per_problem_s": 405.476,
+   "max_problem_s": 1717.778,
+   "n": 10
+  },
+  "Qwen/Qwen3.5-4B": {
+   "load_s": 62.0,
+   "per_problem_s": 189.699,
+   "max_problem_s": 345.486,
+   "n": 12
+  }
+ },
+ "train_file": "1015",
+ "train_sha256": "e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285",
+ "earlier_train": []
+}

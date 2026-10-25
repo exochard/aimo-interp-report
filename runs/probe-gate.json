@@ -1,0 +1,40 @@
+{
+ "rows": 34,
+ "groups": 20,
+ "true_rate": 0.7058823529411765,
+ "arms": {
+  "majority": {
+   "correct": 24,
+   "accuracy": 0.7058823529411765,
+   "balanced": 0.5
+  },
+  "per_model": {
+   "correct": 24,
+   "accuracy": 0.7058823529411765,
+   "balanced": 0.5
+  },
+  "capability": {
+   "correct": 23,
+   "accuracy": 0.6764705882352942,
+   "balanced": 0.4791666666666667
+  },
+  "sensitivity": {
+   "correct": 24,
+   "accuracy": 0.7058823529411765,
+   "balanced": 0.5583333333333333
+  },
+  "combined": {
+   "correct": 23,
+   "accuracy": 0.6764705882352942,
+   "balanced": 0.5666666666666667
+  }
+ },
+ "gate": {
+  "accuracy_ok": false,
+  "margin": -1,
+  "margin_ok": false,
+  "min_margin_drop_one_group": -2,
+  "robust_ok": false,
+  "pass": false
+ }
+}

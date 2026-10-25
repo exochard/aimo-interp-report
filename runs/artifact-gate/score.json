@@ -1,0 +1,100 @@
+{
+ "n": 10,
+ "robust": 7,
+ "majority_label": "robust",
+ "majority_correct": 7,
+ "artifact_correct": 2,
+ "balanced_accuracy": 0.3333333333333333,
+ "right_where_majority_wrong": 2,
+ "wrong_where_majority_right": 7,
+ "auc_robust": 0.14285714285714285,
+ "spearman_score_max_drop": -0.39025115732422666,
+ "diff_correct_minus_majority": -5,
+ "diff_ci95": [
+  -10.0,
+  0.0
+ ],
+ "decision_threshold": 0.5759658815999995,
+ "rows": [
+  {
+   "row": 27,
+   "problem_sha": "37172384f0dc9b88",
+   "is_robust": true,
+   "score": 0.6653580420000005,
+   "pred_robust": false
+  },
+  {
+   "row": 28,
+   "problem_sha": "26a263ad81138dbf",
+   "is_robust": true,
+   "score": 0.8521624840000017,
+   "pred_robust": false
+  },
+  {
+   "row": 29,
+   "problem_sha": "b0cb8396e37bc02b",
+   "is_robust": true,
+   "score": 0.8445963860000015,
+   "pred_robust": false
+  },
+  {
+   "row": 30,
+   "problem_sha": "f862f0368b2ad1a8",
+   "is_robust": true,
+   "score": 0.6753200350952389,
+   "pred_robust": false
+  },
+  {
+   "row": 31,
+   "problem_sha": "a59a836b9807d87b",
+   "is_robust": true,
+   "score": 0.8287689600000007,
+   "pred_robust": false
+  },
+  {
+   "row": 32,
+   "problem_sha": "2ca839cfbfc60e29",
+   "is_robust": true,
+   "score": 0.7563468873999994,
+   "pred_robust": false
+  },
+  {
+   "row": 33,
+   "problem_sha": "d06c3e7f2d19047c",
+   "is_robust": true,
+   "score": 0.7986186220000006,
+   "pred_robust": false
+  },
+  {
+   "row": 34,
+   "problem_sha": "3f55fba10d99fd16",
+   "is_robust": false,
+   "score": 0.47394893466666604,
+   "pred_robust": true
+  },
+  {
+   "row": 35,
+   "problem_sha": "d47975ec2ba3a7dd",
+   "is_robust": false,
+   "score": 0.6292831340000004,
+   "pred_robust": false
+  },
+  {
+   "row": 36,
+   "problem_sha": "7ee9d443789963a7",
+   "is_robust": false,
+   "score": 0.7679870080000011,
+   "pred_robust": false
+  }
+ ],
+ "cv_summary": {
+  "selection_metric": "balanced_accuracy"
+ },
+ "selected_params": {
+  "family": "random_forest",
+  "max_depth": null,
+  "max_features": 1.0,
+  "min_samples_leaf": 1,
+  "n_estimators": 500
+ }
+}

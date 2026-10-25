@@ -1,0 +1,18 @@
+{
+  "n": 86,
+  "robust_rate": 0.407,
+  "heldout_correct": 52,
+  "majority_correct": 51,
+  "gate_three_over_majority": false,
+  "full_rule": {
+    "feature": "flip_max",
+    "threshold": 0.25,
+    "sign": -1
+  },
+  "auc_lower_is_robust": {
+    "flip_max": 0.339,
+    "flip_mean": 0.348,
+    "orig_consistency": 0.592,
+    "no_answer": 0.506
+  }
+}

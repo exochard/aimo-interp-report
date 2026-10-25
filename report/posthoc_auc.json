@@ -1,0 +1,80 @@
+{
+ "prompt:capability": {
+  "rows": 34,
+  "own_cut_correct": 23,
+  "auc": 0.42916666666666664,
+  "auc_interval95": [
+   0.14285714285714285,
+   0.8863636363636364
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 22,
+  "reported_correct": 23
+ },
+ "prompt:sensitivity": {
+  "rows": 34,
+  "own_cut_correct": 24,
+  "auc": 0.5708333333333333,
+  "auc_interval95": [
+   0.3571273291925466,
+   0.8174110671936756
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 18,
+  "reported_correct": 24
+ },
+ "prompt:combined": {
+  "rows": 34,
+  "own_cut_correct": 23,
+  "auc": 0.5916666666666667,
+  "auc_interval95": [
+   0.31772531702898554,
+   0.928
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 22,
+  "reported_correct": 23
+ },
+ "calibration (nested)": {
+  "rows": 34,
+  "own_cut_correct": 25,
+  "auc": 0.6708333333333333,
+  "auc_interval95": [
+   0.44957770987182755,
+   0.9495075757575756
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 24,
+  "reported_correct": 25
+ },
+ "trace sensitivity": {
+  "rows": 34,
+  "own_cut_correct": 22,
+  "auc": 0.3875,
+  "auc_interval95": [
+   0.13683014354066989,
+   0.6353343837535008
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 20,
+  "reported_correct": 22
+ },
+ "hidden-activation probe": {
+  "rows": 34,
+  "own_cut_correct": 22,
+  "auc": 0.35,
+  "auc_interval95": [
+   0.16935377197473972,
+   0.6570048309178744
+  ],
+  "train_share": 0.7064782071186245,
+  "prior_matched_predicted_robust": 24,
+  "prior_matched_correct": 18,
+  "reported_correct": 22
+ }
+}
