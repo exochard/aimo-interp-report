@@ -7,7 +7,7 @@ if [[ "${AIMO_SCOPED:-0}" != 1 ]]; then
 fi
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
-PY=/home/peppe/AI/var/venvs/k12-vl/bin/python
+PY=$HOME/AI/var/venvs/k12-vl/bin/python
 RUN=contests/aimo-interp/runs/activation-r3
 REPORT=coordination/2026-10-14-r3/report-codex.md
 export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2

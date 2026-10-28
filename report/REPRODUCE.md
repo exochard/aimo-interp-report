@@ -1,6 +1,6 @@
 # Reproducing the report
 
-Sections 1 to 4 of `report.md` reproduce on a CPU in about three minutes from the saved features in
+Sections 1 to 4 of `report.tex` reproduce on a CPU in about seven minutes on two CPU threads from the saved features in
 this archive and the data files below. Item 1 of Section 1 (label agreement) is recomputed by
 `report/lesson9_shuffle.py` from the 2026-10-15 file (section 5 below). The hidden-activation
 features need a GPU to regenerate (the CPU run reads their saved predictions); regenerating any
@@ -32,7 +32,7 @@ revision was recorded; the files are dated in the data folder as shown.
 
 | Dataset (file) | Folder date | sha256 |
 |---|---|---|
-| `aimo-interp/train-main-v2` as of 2026-10-15 (`train-2026-10-15.parquet`) | 2026-10-17 | `e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285` |
+| `aimo-interp/train-main-v2` at revision `fa8af758c6519fc97a9d0bd9017feb6f12232b52` (2026-10-15; `train-2026-10-15.parquet`) | 2026-10-17 | `e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285` |
 | `aimo-interp/aimo-interp-challenge-sample-full` (`validation-00000-of-00001.parquet`) | 2026-10-11 | `2989ab6a018f2779a821209f414bd0049c9ef1c2488f589ff2d3bf4ed16942ff` |
 | `aimo-interp/augmented-sample-math-agg` (`validation-00000-of-00001.parquet`) | 2026-10-11 | `b785750259a3f4524cbaf988f51660197cbdfca19d8f45cc35347d4ef29aa4db` |
 | `aimo-interp/augmented-sample-math-agg-filtered` (`validation-00000-of-00001.parquet`) | 2026-10-11 | `b8a485868ce5a14d0c961e009e30bc61f850ad2d2224a01ae1ada401fb73ed3d` |
@@ -64,8 +64,8 @@ activation row needs the GPU feature run of section 4 first):
 
 ```
 .venv/bin/python report/lesson9_shuffle.py data/train-main-v2/train-2026-10-15.parquet
-.venv/bin/python report/split_audit.py --out split-audit-rerun.json              # compare with report/split-audit.json (about 7 min, 2 CPU)
-.venv/bin/python report/split_audit.py --train 1015 --out split-audit-1015-rerun.json   # report/split-audit-1015.json
+.venv/bin/python report/split_audit.py --out split-audit-rerun.json              # compare with report/split-audit.json (about 9 min on 2 CPU threads)
+.venv/bin/python report/split_audit.py --train 1015 --out split-audit-1015-rerun.json   # report/split-audit-1015.json (about 14 min)
 .venv/bin/python report/posthoc_auc.py > posthoc_auc-rerun.json    # compare with report/posthoc_auc.json
 .venv/bin/python report/forest.py                                  # rewrites report/forest.png from intervals.json
 ```
@@ -128,7 +128,7 @@ byte for byte with the extended feature files in place.
 | Lesson 6 (solved problems that are still non-robust) | the organisers' `augmented-sample-math-agg-filtered/validation-00000-of-00001.parquet` (sha256 `b8a485868ce5a14d0c961e009e30bc61f850ad2d2224a01ae1ada401fb73ed3d`) and `augmented-sample-math-agg/validation-00000-of-00001.parquet` (sha256 `b785750259a3f4524cbaf988f51660197cbdfca19d8f45cc35347d4ef29aa4db`) (the same model, DeepSeek-R1-0528-Qwen3-8B, whose id appears as `qwen3-8b:low` in the second; the first's 52 problems are all in the second) | `python report/lesson6_counts.py FILTERED.parquet AGG.parquet`; tested by `report/test_lesson6_counts.py` |
 | Lesson 7 (no final answer within 4,096 tokens) | not recorded | `answer_flips.py generate --no-force`; no run folder for the 36-sample check was kept, so this number cannot be reproduced from the archive |
 | Lesson 8 (forced final answer) | the `train-main-v2` file of 2026-10-15 (`data/train-main-v2/train-2026-10-15.parquet`, sha256 `e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285`; 94 rows, not the pinned revision; 80 labelled) plus the 52 DeepSeek rows of the organisers' `augmented-sample-math-agg-filtered` set (hash above), as `runs/flip-rows-v2.parquet` (95 rows; not in the archive, since it carries the organisers' problem text: rebuild it from those two files) | `answer_flips.py generate` (forcing is the default) and `evaluate`; `runs/force-r4/` (`*.jsonl`, `eval-3models.json`); per-model AUCs: `python report/per_model_auc.py runs/force-r4/{Qwen3.5-4B,Skywork-OR1-Math-7B,DeepSeek-R1-0528-Qwen3-8B}.jsonl --pool Qwen3.5 --pool Skywork` (0.703 and 0.685 per model, 0.697 pooled on 24 rows; DeepSeek 0.348 on 62, which mixes two label sources); by label source: `python report/flips_by_source.py runs/flip-rows-v2.parquet runs/force-r4/{Qwen3.5-4B,Skywork-OR1-Math-7B,DeepSeek-R1-0528-Qwen3-8B}.jsonl` (train-file rows: AUC 0.706 on 34 rows, held-out 18 against a majority of 24; augmented rows: AUC 0.402 on 52, held-out 41 against 41; it also prints problem-grouped bootstrap 95 % intervals, 4,000 draws, seed 0: train file all [0.44, 0.87], organisers' set [0.22, 0.59], DeepSeek train rows [0.12, 1.00], difference 0.304 [-0.01, 0.54]; with `--permutations data/augmented-sample-math-agg-filtered/validation-00000-of-00001.parquet` it adds the organisers' rows whose problem has only typos, distract or rename permutations in every source row: 12 rows, 4 robust, AUC 0.547 [0.10, 0.89]), tested by `report/test_per_model_auc.py`, `report/test_flips_by_source.py` |
-| Lesson 3 (control moved the likelihood more in 25 of 32) | `runs/trace-pilot/rows.jsonl` | `python report/trace_control.py runs/trace-pilot/rows.jsonl --labels data/train-main-v2/train-00000-of-00001.parquet` (37 rows, 32 with a control, 25 moved more, median ratio 0.61; labelled: 29 with a control, 22, 0.62); tested by `report/test_trace_control.py` |
+| Lesson 3 (control moved the likelihood more in 33 of 42) | `runs/trace-pilot/rows.jsonl` | `python report/trace_control.py runs/trace-pilot/rows.jsonl --labels data/train-main-v2/train-00000-of-00001.parquet` (49 rows: the 37-row pilot plus 12 Skywork rows of the 43-row refit; 42 with a control, 33 moved more, median ratio 0.62; labelled: 29 with a control, 22, 0.62); tested by `report/test_trace_control.py` |
 | Generation stability (Section 4) | `runs/gen-qwen3-5-4b` (not in the archive: the generations quote the problems; regenerate them as in section 4) | `python analyze_gen.py --labelled` prints the largest Spearman on the 12 labelled rows (0.24, p = 0.46); needs `scipy` |
 | Lesson 9 (counts) | pinned revision and the 2026-10-15 file, plus `aimo-interp-challenge-sample-full` | `python report/lesson9_counts.py TRAIN.parquet [TRAIN2.parquet] --public PUBLIC.parquet`; label-shuffle null (Section 1, item 1): `python report/lesson9_shuffle.py data/train-main-v2/train-2026-10-15.parquet`; tests `report/test_lesson9_counts.py`, `report/test_lesson9_shuffle.py`; sample transfer (Appendix C): `python report/sample_transfer.py data/train-main-v2/train-00000-of-00001.parquet PUBLIC.parquet`, tested by `report/test_sample_transfer.py` |
 | Length baseline for the artifact's 0.626 (Section 5, Appendix C) | the organisers' `augmented-sample-math-agg` validation parquet (141 rows, 137 problems) | `python report/length_baseline.py` (run from the lane root; prints balanced accuracy over 20 seeds, the 200-shuffle null and the reference lines) |
@@ -170,7 +170,7 @@ one of the six signals tested in the report; scored afterwards on the 10 DeepSee
 | `dist/always-true-small.zip` | 2026-10-11 | small | 977183 | not recorded (first small upload went to the main task and failed ingestion) | `a3748c648a5a0d9a56fa67cf013c6690d755b7f0a55647f37ccade75825ddbc2` |
 | `dist/probe/main-qwen4b.zip` | 2026-10-18 | main | not recorded | net 0 | `d1b2b9e455dfd397c0d9738b05627f4bfd03670f6b23b3123d101239a79a57c7` |
 | `dist/probe/main-olmo.zip` | 2026-10-18 | main | not recorded | net 0 | `5036f524db8a15a16ac85fc957e4eedf76fca92350f423fc03843a6a8ab415e0` |
-| `dist/probe/main-deepseek.zip` | 2026-10-18 | main | not recorded | net -1 (cancelled on 2026-10-19 per the funnel) | `4102034bdf0cf000f0b34c375f783e52f748c05dad0830b176847fd654440882` |
+| `dist/probe/main-deepseek.zip` | 2026-10-18 | main | not recorded | net -1 (cancelled on 2026-10-19 per our submission log) | `4102034bdf0cf000f0b34c375f783e52f748c05dad0830b176847fd654440882` |
 | `dist/probe/main-gptoss-low.zip` | 2026-10-18 | main | not recorded | net -1 | `ca407e397507ccaab4f4024935c924d6802727523b187e3aed5c203ba3c80c43` |
 | `dist/probe/main-gptoss-medium.zip` | 2026-10-18 | main | not recorded | net +1 (0.57) | `12414c2268900c4f37420b7a9881521dc297c991b17fe0686fbfac3e87cc4122` |
 | `dist/probe/main-skywork.zip` | 2026-10-18 | main | not recorded | none (pending, cancelled) | `8a9b311ef173ebc4d2b854295650a153ac0b42c23eff0a0387fee65688a643d1` |
@@ -179,16 +179,38 @@ one of the six signals tested in the report; scored afterwards on the 10 DeepSee
 | `dist/probe/small-olmo.zip` | 2026-10-18 | small | not recorded | net -1 | `29a6aec09ba052133f86359dc11b5330b35783357d098dd612aaae5c27312246` |
 | `dist/entry/main-hybrid-v1.zip` | 2026-10-19 | main | 1002314 | 0.57 | `d2df7dc8a0daaf850636c717e267579058a5fd53856c56365dfae3809faf671b` |
 | `dist/entry/small-groups-v1.zip` | 2026-10-19 | small | 1002316 | 0.64 | `82344d44e9b9d86e68cee3750125c13fa39d9597c4069f379412b79dfa6cfafc` |
-| `dist/entry/small-hybrid-v1.zip` | 2026-10-19 | small | 1002317 | not recorded (running at last note) | `376c170a05b963c8706195f4cc26730375c5f984a02ebf2e4e46e6c7e706dc0c` |
+| `dist/entry/small-hybrid-v1.zip` | 2026-10-19 | small | 1002317 | 0.57 | `376c170a05b963c8706195f4cc26730375c5f984a02ebf2e4e46e6c7e706dc0c` |
+| `dist/entry/main-training-v3.zip` | 2026-10-27 | main | 1014009 | 0.48 | `c315e32fc6392fb322351dcd96980e180dec248e2c381ac48f7c90dd90a908b7` |
+| `dist/entry/small-training-v3.zip` | 2026-10-27 | small | 1014010 | 0.50 | `470ceba57ca85278458726dc5d990f1a2db4a850379a3c8f1745b26ae4c937bf` |
 
-"Net" is the funnel's net robust count: score times problems, minus the all-non-robust score
-(public sets: 21 main and 14 small problems). The funnel lists ten probe uploads; the tenth
+"Net" is our submission log's net robust count: score times problems, minus the all-non-robust score
+(public sets: 21 main and 14 small problems). The log lists ten probe uploads; the tenth
 (small, DeepSeek, net +1) has no zip in `dist/probe/`. The probe zips are single-configuration
 groups; the group for each hybrid and for `small-groups-v1` was chosen from these per-configuration
-public counts, which the funnel itself calls noise-sized at +/-1. Uploading a zip to
+public counts, which the log itself calls noise-sized at +/-1. Uploading a zip to
 https://www.codabench.org/competitions/16180/ reproduces its score only if the public set is
 unchanged. Guarded v2 hybrids (`entry/`, built by `entry/build.sh`) are prepared, not uploaded; their zips
 ship too: `dist/entry/main-hybrid-v2.zip` (`39d1752a8d6d8fe143e5e9f9341c469f57473ef5ecc78ca51dfdfcd19bae565e`)
 and `dist/entry/small-hybrid-v2.zip` (`b6d1e6e363c554f82044848cb0dec975d7bf7d96b540f023a082fc3ee5d1ebef`).
+
+The v3 training-only entries of 2026-10-27 are rebuilt with `entry/build.sh v3`, which writes
+`main-training-v3.zip` and `small-training-v3.zip` to `dist/entry/` (`OUT_DIR` overrides the folder)
+from `solution.py` and `entry/training-prior.json` (plus `small.txt` on small), with fixed timestamps and
+file order, so two builds give the same bytes (`entry/test_entry_v3.py`, line 175). The prior is fitted by
+`entry/fit_training_prior.py` on the organisers' 2026-10-15 training file (Hugging Face revision
+`fa8af758c6519fc97a9d0bd9017feb6f12232b52`, sha256
+`e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285`) and uses no public-set signal.
+
+```
+.venv/bin/python -c "from huggingface_hub import hf_hub_download as d; print(d('aimo-interp/train-main-v2', 'data/train-00000-of-00001.parquet', repo_type='dataset', revision='fa8af758c6519fc97a9d0bd9017feb6f12232b52', local_dir='data/train-main-v2-1015'))"
+cp data/train-main-v2-1015/data/train-00000-of-00001.parquet data/train-main-v2/train-2026-10-15.parquet
+.venv/bin/python entry/fit_training_prior.py --train data/train-main-v2/train-2026-10-15.parquet --pinned data/train-main-v2/train-00000-of-00001.parquet --out prior-rerun.json
+cmp prior-rerun.json entry/training-prior.json && echo "prior reproduced"
+OUT_DIR=v3-rerun bash entry/build.sh v3 && sha256sum v3-rerun/*.zip
+# c315e32fc6392fb322351dcd96980e180dec248e2c381ac48f7c90dd90a908b7  v3-rerun/main-training-v3.zip
+# 470ceba57ca85278458726dc5d990f1a2db4a850379a3c8f1745b26ae4c937bf  v3-rerun/small-training-v3.zip
+```
+
+Both steps were rerun on 2026-10-27: the refitted prior is byte-identical and the two zips match the uploaded hashes.
 
 `MANIFEST.sha256` lists every file in this archive with its hash (`sha256sum -c MANIFEST.sha256`).

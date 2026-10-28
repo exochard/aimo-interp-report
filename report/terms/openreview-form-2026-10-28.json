@@ -1,0 +1,292 @@
+{
+ "source": "https://api2.openreview.net/invitations?id=NeurIPS.cc/2026/Workshop/AIMOInterp_Challenge/-/Submission",
+ "fetched": "2026-10-28T20:45+01:00",
+ "duedate_ms": 1793969940000,
+ "expdate_ms": 1793971740000,
+ "content": {
+  "title": {
+   "order": 1,
+   "description": "Title of paper. Add TeX formulas using the following formats: $In-line Formula$ or $$Block Formula$$.",
+   "value": {
+    "param": {
+     "type": "string",
+     "regex": "^.{1,250}$"
+    }
+   }
+  },
+  "authors": {
+   "order": 2,
+   "description": "Search author profile by name or profile ID. All authors must have an OpenReview profile prior to submitting a paper. **Please note that we only allow one technical report per the first author.** We will check that each OpenReview submission is associated with Codabench submission_ids linked to the same Codabench user_id and only consider the first submission. If the submission is eligible for any prize, the first author will also need to undertake identity verification matching the name with OpenReview Author.",
+   "value": {
+    "param": {
+     "type": "author{}",
+     "properties": {
+      "fullname": {
+       "param": {
+        "type": "string"
+       }
+      },
+      "username": {
+       "param": {
+        "type": "string",
+        "regex": "^~\\S+$",
+        "mismatchError": "must be a valid profile ID"
+       }
+      },
+      "institutions": {
+       "param": {
+        "type": "object{}",
+        "properties": {
+         "name": {
+          "param": {
+           "type": "string"
+          }
+         },
+         "domain": {
+          "param": {
+           "type": "string"
+          }
+         },
+         "country": {
+          "param": {
+           "type": "string"
+          }
+         }
+        },
+        "optional": true
+       }
+      }
+     }
+    }
+   }
+  },
+  "reciprocal_reviewers": {
+   "order": 3,
+   "description": "Reciprocal Reviewer for your submission will be assigned three other submissions to review in exchange for your own reviews. Nominated reviewers must be listed as authors of this submission and must complete their assigned reviews on time. As the Authors rely on the timeliness of the reviews with registration slots, **submissions that do not meet this requirement, or whose nominated reviewers fail to submit their reviews, will be desk rejected and not considered for awards.** Search by name or profile ID for the authors of this submission. **We will send out invitations for reviewing directly after the submission deadline, please accept them as fast as possible to ensure a smooth reviewing process.**",
+   "value": {
+    "param": {
+     "fieldName": "Reciprocal Reviewer",
+     "type": "profile[]",
+     "regex": "^~\\S+$",
+     "mismatchError": "must be a valid OpenReview profile ID starting with ~."
+    }
+   }
+  },
+  "voluntary_reviewers": {
+   "order": 3,
+   "description": "Voluntary Reviewers will be assigned three or fewer submissions to review. **Both Reciprical and Voluntary Reviewers will be considered for Outstanding Reviewer awards, warranting an extra full conference registration slot at NeurIPS 2026 in Paris.** Please note that we rely on the timeliness of Voluntary Reviewers, and so the same conditions apply to Voluntary Reviewers as the Reciprocal Reviewers.",
+   "value": {
+    "param": {
+     "fieldName": "Voluntary Reviewer(s)",
+     "type": "profile[]",
+     "regex": "^~\\S+$",
+     "mismatchError": "must be a valid OpenReview profile ID starting with ~.",
+     "optional": true
+    }
+   }
+  },
+  "keywords": {
+   "description": "Comma-separated list of keywords.",
+   "order": 4,
+   "value": {
+    "param": {
+     "type": "string[]",
+     "regex": ".+"
+    }
+   }
+  },
+  "TLDR": {
+   "order": 5,
+   "description": "\"Too Long; Didn't Read\": a short sentence describing your paper",
+   "value": {
+    "param": {
+     "fieldName": "TL;DR",
+     "type": "string",
+     "maxLength": 250,
+     "optional": true,
+     "deletable": true
+    }
+   }
+  },
+  "abstract": {
+   "order": 6,
+   "description": "Abstract of paper. Add TeX formulas using the following formats: $In-line Formula$ or $$Block Formula$$.",
+   "value": {
+    "param": {
+     "type": "string",
+     "maxLength": 5000,
+     "markdown": true,
+     "input": "textarea"
+    }
+   }
+  },
+  "pdf": {
+   "order": 7,
+   "description": "Upload a PDF file that ends with .pdf. The main body of the report should not exceed 5 pages (NeurIPS template) and needs to be anonymized. In addition, you can use an unlimited number of pages for the AI usage statement, limitations, and appendix.",
+   "value": {
+    "param": {
+     "type": "file",
+     "extensions": [
+      "pdf"
+     ],
+     "maxSize": 50
+    }
+   }
+  },
+  "supplementary_material": {
+   "order": 8,
+   "description": "Optional supplementary material (e.g., code or datasets). Please upload a single ZIP file. The maximum file size is 50 MB.",
+   "value": {
+    "param": {
+     "type": "file",
+     "extensions": [
+      "zip"
+     ],
+     "maxSize": 50,
+     "optional": true,
+     "deletable": true
+    }
+   }
+  },
+  "leaderboard_submission_ids": {
+   "order": 10,
+   "description": "Enter one or two IDs of Codabench leaderboard submissions (main or small track) that this paper describes and that we should evaluate for the prizes. Separate two IDs with a comma, e.g. 123456 or 123456, 654321.",
+   "value": {
+    "param": {
+     "fieldName": "Codabench Submission IDs",
+     "type": "string",
+     "regex": "^\\s*[^\\s,]+\\s*(,\\s*[^\\s,]+\\s*)?$",
+     "mismatchError": "enter one or two submission IDs separated by a comma, e.g. 123456 or 123456, 654321"
+    }
+   }
+  },
+  "white_box_award": {
+   "order": 20,
+   "description": "Tick this box if your submission should be considered for the White-Box Award. Your method's verdict must depend on signals beyond the generated text (e.g. activations, probes, SAEs, patching, steering), and your report must include an ablation with vs. without the white-box component. Please note that token-level logprobs alone are not sufficient to be considered for the white-box award.",
+   "value": {
+    "param": {
+     "type": "string[]",
+     "optional": true,
+     "items": [
+      {
+       "value": "Consider this submission for the White-Box Award",
+       "description": "Consider this submission for the White-Box Award",
+       "optional": true
+      }
+     ],
+     "input": "checkbox"
+    }
+   }
+  },
+  "ai_assistance": {
+   "order": 21,
+   "description": "AI assistance disclosure. Tick every area in which generative AI tools (e.g. LLM chat assistants, coding assistants, agents) were used. If no AI assistance was used, tick only the last option. Your answers here must match the AI Use Statement in your paper.",
+   "value": {
+    "param": {
+     "fieldName": "AI Assistance",
+     "type": "string[]",
+     "items": [
+      {
+       "value": "Ideation",
+       "description": "Ideation: proposing or refining hypotheses, developing theoretical models or conceptual frameworks, formulating mathematical claims or proofs, designing methodology or experiments, brainstorming topics, literature search and summarization",
+       "optional": true
+      },
+      {
+       "value": "Coding",
+       "description": "Coding: implementing methods, creating or editing code, suggesting experimental parameters, generating synthetic data, cleaning or reformatting datasets",
+       "optional": true
+      },
+      {
+       "value": "Analysis",
+       "description": "Analysis: interpreting results, supporting qualitative or thematic analysis, creating or modifying figures",
+       "optional": true
+      },
+      {
+       "value": "Writing",
+       "description": "Writing: drafting parts of the paper, translation, editing for readability, suggesting structure, title or keywords, formatting references",
+       "optional": true
+      },
+      {
+       "value": "No AI assistance was used",
+       "description": "No AI assistance was used",
+       "optional": true
+      }
+     ],
+     "input": "checkbox"
+    }
+   }
+  },
+  "ai_use_statement": {
+   "order": 22,
+   "description": "Every paper must include a mandatory 'AI Use Statement' section after the main text and before the references. It does not count toward the page limit. The statement must (1) name the tasks for which generative AI tools were used and which tools, (2) name the relevant tasks for which they were not used, and (3) confirm that the authors reviewed all AI-assisted work and take full responsibility for the final content, including AI-assisted text, claims, code, and other artifacts. Suggested structure: 'In this work, we used generative AI tools for <tasks>. We did not use generative AI tools for <other tasks>. We have reviewed all AI-assisted work and take responsibility for the final content of this paper.' More detail is welcome. If no AI assistance was used, the statement must say so. Missing statements, or falsehoods, plagiarism or misrepresentation introduced through AI tools, are treated as violations of the Code of Ethics and may lead to desk rejection.",
+   "value": {
+    "param": {
+     "fieldName": "AI Use Statement in Paper",
+     "type": "string",
+     "enum": [
+      "We confirm that our paper includes an AI Use Statement consistent with the boxes ticked above, and that we take full responsibility for all AI-assisted content."
+     ],
+     "input": "radio"
+    }
+   }
+  },
+  "reciprocal_reviewing_acknowledgement": {
+   "order": 23,
+   "description": "Please confirm the reciprocal reviewing requirement on behalf of all authors.",
+   "value": {
+    "param": {
+     "fieldName": "Reciprocal Reviewing Acknowledgment",
+     "type": "string",
+     "enum": [
+      "We acknowledge that the nominated reviewers must complete all of their assigned reviews on time, and that failure to do so (including missing, late, low-effort, or undisclosed AI-generated reviews) may result in desk rejection of this submission."
+     ],
+     "input": "radio"
+    }
+   }
+  },
+  "rules_no_duplicates": {
+   "order": 24,
+   "description": "No duplicate reports: teams are not allowed to submit multiple reports for identical or highly similar methods. If two or more submitted technical reports describe identical or similar methods with significant methodological overlap, all such reports may be subject to desk rejection.",
+   "value": {
+    "param": {
+     "fieldName": "Rules: No Duplicate Reports",
+     "type": "string",
+     "enum": [
+      "We confirm that we have not submitted another report describing an identical or highly similar method, and we acknowledge that overlapping reports may all be desk rejected."
+     ],
+     "input": "radio"
+    }
+   }
+  },
+  "rules_compliance": {
+   "order": 25,
+   "description": "Please confirm on behalf of all authors that this submission complies with all challenge rules.",
+   "value": {
+    "param": {
+     "fieldName": "Rules: General Compliance",
+     "type": "string",
+     "enum": [
+      "We confirm that this submission follows all rules of the challenge, and we acknowledge that submissions found to violate the rules may be desk rejected or disqualified."
+     ],
+     "input": "radio"
+    }
+   }
+  },
+  "venue": {
+   "value": {
+    "param": {
+     "const": "NeurIPS 2026 Workshop AIMOInterp Challenge Submission",
+     "hidden": true
+    }
+   }
+  },
+  "venueid": {
+   "value": {
+    "param": {
+     "const": "NeurIPS.cc/2026/Workshop/AIMOInterp_Challenge/Submission",
+     "hidden": true
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+  "grid": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "input_file": "1015 (file of 2026-10-15, 94 rows)",
+  "input_sha256": "e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285",
+  "min_n": 5,
+  "pinned_sha256": "bedfb551ea0f4d95d5e70e1df7cf61395ce2d36eeba2869aba6a90fc3c198824",
+  "threshold": 0.5,
+  "tracks": {
+    "main": {
+      "configurations": [
+        {
+          "model_id": "openai/gpt-oss-120b",
+          "non_robust": 2,
+          "posterior": 0.7776257269928156,
+          "reasoning_effort": "high",
+          "robust": 13,
+          "robust_decision": true,
+          "used_global": false
+        },
+        {
+          "model_id": "openai/gpt-oss-120b",
+          "non_robust": 2,
+          "posterior": 0.7525694708793301,
+          "reasoning_effort": "low",
+          "robust": 5,
+          "robust_decision": true,
+          "used_global": false
+        },
+        {
+          "model_id": "openai/gpt-oss-120b",
+          "non_robust": 5,
+          "posterior": 0.7396510434485118,
+          "reasoning_effort": "medium",
+          "robust": 10,
+          "robust_decision": true,
+          "used_global": false
+        }
+      ],
+      "gate_passed": true,
+      "global_decision": true,
+      "global_posterior": 0.7567567567567568,
+      "inner_log_loss": {
+        "1": 0.6282733233365961,
+        "16": 0.598583516943626,
+        "2": 0.6218787162568187,
+        "32": 0.5956921122431741,
+        "4": 0.6134303243936956,
+        "64": 0.5950790125760947,
+        "8": 0.604814654844342
+      },
+      "prior_strength": 64,
+      "problems": 21,
+      "robust": 28,
+      "rows": 37,
+      "selected_rule": "hierarchical"
+    },
+    "small": {
+      "configurations": [
+        {
+          "model_id": "Qwen/Qwen3.5-4B",
+          "non_robust": 4,
+          "posterior": 0.7123623011015912,
+          "reasoning_effort": "default",
+          "robust": 8,
+          "robust_decision": true,
+          "used_global": false
+        },
+        {
+          "model_id": "Skywork/Skywork-OR1-Math-7B",
+          "non_robust": 3,
+          "posterior": 0.7255201958384333,
+          "reasoning_effort": "default",
+          "robust": 9,
+          "robust_decision": true,
+          "used_global": false
+        },
+        {
+          "model_id": "allenai/Olmo-3-7B-Think",
+          "non_robust": 2,
+          "posterior": 0.7279388340235743,
+          "reasoning_effort": "default",
+          "robust": 7,
+          "robust_decision": true,
+          "used_global": false
+        },
+        {
+          "model_id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+          "non_robust": 3,
+          "posterior": 0.7181018227529855,
+          "reasoning_effort": "default",
+          "robust": 7,
+          "robust_decision": true,
+          "used_global": false
+        }
+      ],
+      "gate_passed": true,
+      "global_decision": true,
+      "global_posterior": 0.7209302325581395,
+      "inner_log_loss": {
+        "1": 0.6989573852985493,
+        "16": 0.6725393798413717,
+        "2": 0.6943388991856111,
+        "32": 0.666863031531427,
+        "4": 0.6877403058360774,
+        "64": 0.6631907645523011,
+        "8": 0.6799400756882065
+      },
+      "prior_strength": 64,
+      "problems": 22,
+      "robust": 31,
+      "rows": 43,
+      "selected_rule": "hierarchical"
+    }
+  }
+}

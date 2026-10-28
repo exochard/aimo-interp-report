@@ -1,7 +1,7 @@
 {
  "train_sha256": "e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285",
  "artifact_sha256": "bc90bd8eed4d9f6383cbb9ae1626896afea90b0e71c46d9a56bc87d376f85592",
- "model_path": "/home/peppe/AI/var/artifacts/models/src/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+ "model_path": "$HOME/AI/var/artifacts/models/src/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
  "generation_config": {
   "max_prompt_length": 2048,
   "max_new_tokens": 4096,

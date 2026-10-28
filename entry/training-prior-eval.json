@@ -1,0 +1,239 @@
+{
+  "chosen_prior_strength": {
+    "main": 64,
+    "small": 64
+  },
+  "evaluation": {
+    "main-37 (1015)": {
+      "gate_passed": true,
+      "scores": {
+        "always_robust": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        },
+        "per_model_majority": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        },
+        "prior": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        }
+      },
+      "track": "main"
+    },
+    "main-37 (pinned)": {
+      "gate_passed": true,
+      "scores": {
+        "always_robust": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        },
+        "per_model_majority": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        },
+        "prior": {
+          "by_model": {
+            "openai/gpt-oss-120b": [
+              28,
+              37
+            ]
+          },
+          "correct": 28,
+          "n": 37
+        }
+      },
+      "track": "main"
+    },
+    "small-34 (pinned)": {
+      "gate_passed": true,
+      "scores": {
+        "always_robust": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              2,
+              3
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 24,
+          "n": 34
+        },
+        "per_model_majority": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              2,
+              3
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 24,
+          "n": 34
+        },
+        "prior": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              2,
+              3
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 24,
+          "n": 34
+        }
+      },
+      "track": "small"
+    },
+    "small-43 (1015)": {
+      "gate_passed": true,
+      "scores": {
+        "always_robust": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              9,
+              12
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 31,
+          "n": 43
+        },
+        "per_model_majority": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              9,
+              12
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 31,
+          "n": 43
+        },
+        "prior": {
+          "by_model": {
+            "Qwen/Qwen3.5-4B": [
+              8,
+              12
+            ],
+            "Skywork/Skywork-OR1-Math-7B": [
+              9,
+              12
+            ],
+            "allenai/Olmo-3-7B-Think": [
+              7,
+              9
+            ],
+            "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B": [
+              7,
+              10
+            ]
+          },
+          "correct": 31,
+          "n": 43
+        }
+      },
+      "track": "small"
+    }
+  },
+  "grid": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "input_sha256": "e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285",
+  "pinned_sha256": "bedfb551ea0f4d95d5e70e1df7cf61395ce2d36eeba2869aba6a90fc3c198824",
+  "selected_rule": {
+    "main": "hierarchical",
+    "small": "hierarchical"
+  }
+}
