@@ -24,7 +24,7 @@ if [ "${1:-}" = "v3" ]; then
   done
   exit 0
 fi
-kit="${KIT_DIR:-$HOME/Projects/Athlon/contests/aimo-interp/kit}/solutions/uncertainty-profiling"
+kit="${KIT_DIR:-$lane/kit}/solutions/uncertainty-profiling"
 out="$lane/dist/entry"
 mkdir -p "$out"
 stage="$(mktemp -d "$out/tmp.XXXXXXXXXX")"

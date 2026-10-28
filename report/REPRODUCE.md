@@ -54,11 +54,11 @@ diff <(python3 -m json.tool report/intervals.json) <(python3 -m json.tool interv
 
 `intervals.py` refits every method with the code that produced it (`fit_probe.py`,
 `sub/calibration.py`, `fit_trace_probe.py`), reads the hidden-activation probe from its saved
-predictions (`runs/activation-r3-yuris/probe.json`: problem hash, model, label, probe and majority
+predictions (`runs/activation-r3/probe.json`: problem hash, model, label, probe and majority
 prediction per row; the problem text is matched by sha256), asserts that the correct counts match the saved
 reports, and recomputes the paired bootstrap intervals (10,000 whole-problem resamples, fixed seed).
 Section 1, item 1 (needs the 2026-10-15 file) and the post hoc ranking of Appendix B.2 (the same
-refits as `intervals.py`; its hidden-activation row also reads `runs/activation-r3-yuris/features`, which
+refits as `intervals.py`; its hidden-activation row also reads `runs/activation-r3/features`, which
 the archive does not ship: without it the script prints the other five rows and notes the skipped row on stderr; the
 activation row needs the GPU feature run of section 4 first):
 
@@ -97,7 +97,7 @@ Data: `train-2026-10-15.parquet`, sha256 `e18eb44207e7987781ec2ff214793196038442
 
 ```
 python run_trace_pilot.py runs/trace-pilot/rows.jsonl 60 --train 1015 --append --models Skywork/Skywork-OR1-Math-7B
-python run_activation_probe.py --out runs/activation-r3-yuris/features --train 1015 --append --only Skywork/Skywork-OR1-Math-7B
+python run_activation_probe.py --out runs/activation-r3/features --train 1015 --append --only Skywork/Skywork-OR1-Math-7B
 python kaggle/make_feat.py
 CUDA_VISIBLE_DEVICES= HF_HUB_OFFLINE=1 AIMO_LANE=<lane> OUT=<dir with features.jsonl> ONLY_LABELLED=1 SKIP_INSTALL=1 python <lane>/kaggle/feat/run.py --train 1015 --append --models Skywork/Skywork-OR1-Math-7B
 ```
@@ -110,7 +110,7 @@ in a copy of the lane (the fitters overwrite `runs/probe.json`, `runs/probe-gate
 python fit_probe.py runs/feat/features.jsonl --train 1015
 python sub/calibration.py runs/feat/features.jsonl --train 1015
 python fit_trace_probe.py runs/trace-pilot/rows.jsonl runs/trace-pilot/probe.json --train 1015
-python fit_activation_probe.py --features runs/activation-r3-yuris/features --out runs/activation-r3-yuris/probe.json --train 1015
+python fit_activation_probe.py --features runs/activation-r3/features --out runs/activation-r3/probe.json --train 1015
 python report/intervals.py --train 1015 > report/intervals-43.json
 python report/posthoc_auc.py --train 1015 > report/posthoc_auc-43.json
 python report/balanced_gates.py runs
@@ -124,7 +124,7 @@ byte for byte with the extended feature files in place.
 | Part of the report | Data | Script and run folder |
 |---|---|---|
 | Sections 1-4 (results table in Section 4) | `train-main-v2` at Hugging Face revision `23791d9b`, 82 rows (`train-00000-of-00001.parquet`, sha256 `bedfb551…`) | `fit_probe.py`, `sub/calibration.py`, `fit_trace_probe.py`, `report/intervals.py`; `runs/feat`, `runs/probe-gate.json`, `runs/calibration-nested`, `runs/trace-pilot` |
-| Lesson 5 (hidden states) | same revision | `run_activation_probe.py`, `fit_activation_probe.py`; `runs/activation-r3-yuris/probe.json` |
+| Lesson 5 (hidden states) | same revision | `run_activation_probe.py`, `fit_activation_probe.py`; `runs/activation-r3/probe.json` |
 | Lesson 6 (solved problems that are still non-robust) | the organisers' `augmented-sample-math-agg-filtered/validation-00000-of-00001.parquet` (sha256 `b8a485868ce5a14d0c961e009e30bc61f850ad2d2224a01ae1ada401fb73ed3d`) and `augmented-sample-math-agg/validation-00000-of-00001.parquet` (sha256 `b785750259a3f4524cbaf988f51660197cbdfca19d8f45cc35347d4ef29aa4db`) (the same model, DeepSeek-R1-0528-Qwen3-8B, whose id appears as `qwen3-8b:low` in the second; the first's 52 problems are all in the second) | `python report/lesson6_counts.py FILTERED.parquet AGG.parquet`; tested by `report/test_lesson6_counts.py` |
 | Lesson 7 (no final answer within 4,096 tokens) | not recorded | `answer_flips.py generate --no-force`; no run folder for the 36-sample check was kept, so this number cannot be reproduced from the archive |
 | Lesson 8 (forced final answer) | the `train-main-v2` file of 2026-10-15 (`data/train-main-v2/train-2026-10-15.parquet`, sha256 `e18eb44207e7987781ec2ff214793196038442bdc1466fdf5498f3e87ec58285`; 94 rows, not the pinned revision; 80 labelled) plus the 52 DeepSeek rows of the organisers' `augmented-sample-math-agg-filtered` set (hash above), as `runs/flip-rows-v2.parquet` (95 rows; not in the archive, since it carries the organisers' problem text: rebuild it from those two files) | `answer_flips.py generate` (forcing is the default) and `evaluate`; `runs/force-r4/` (`*.jsonl`, `eval-3models.json`); per-model AUCs: `python report/per_model_auc.py runs/force-r4/{Qwen3.5-4B,Skywork-OR1-Math-7B,DeepSeek-R1-0528-Qwen3-8B}.jsonl --pool Qwen3.5 --pool Skywork` (0.703 and 0.685 per model, 0.697 pooled on 24 rows; DeepSeek 0.348 on 62, which mixes two label sources); by label source: `python report/flips_by_source.py runs/flip-rows-v2.parquet runs/force-r4/{Qwen3.5-4B,Skywork-OR1-Math-7B,DeepSeek-R1-0528-Qwen3-8B}.jsonl` (train-file rows: AUC 0.706 on 34 rows, held-out 18 against a majority of 24; augmented rows: AUC 0.402 on 52, held-out 41 against 41; it also prints problem-grouped bootstrap 95 % intervals, 4,000 draws, seed 0: train file all [0.44, 0.87], organisers' set [0.22, 0.59], DeepSeek train rows [0.12, 1.00], difference 0.304 [-0.01, 0.54]; with `--permutations data/augmented-sample-math-agg-filtered/validation-00000-of-00001.parquet` it adds the organisers' rows whose problem has only typos, distract or rename permutations in every source row: 12 rows, 4 robust, AUC 0.547 [0.10, 0.89]), tested by `report/test_per_model_auc.py`, `report/test_flips_by_source.py` |

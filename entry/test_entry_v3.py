@@ -112,8 +112,7 @@ def test_json_hash_matches_training_parquet():
     data = json.loads(JSON.read_text())
     assert data["input_sha256"] == TRAIN_SHA
     candidates = [Path(p) / "train-main-v2" / PARQUET_NAME
-                  for p in (os.environ.get("AIMO_DATA_DIR"), HERE.parent / "data",
-                            Path.home() / "Projects/Athlon/contests/aimo-interp/data") if p]
+                  for p in (os.environ.get("AIMO_DATA_DIR"), HERE.parent / "data") if p]
     parquet = next((p for p in candidates if p.exists()), None)
     if parquet is None:
         pytest.skip("training parquet not on this machine; the pinned hash constant was checked above")
@@ -128,8 +127,7 @@ def test_json_has_no_problem_text():
 
 def test_source_has_no_public_set_text_or_ids():
     pd = pytest.importorskip("pandas")
-    roots = [p for p in (os.environ.get("AIMO_DATA_DIR"), HERE.parent / "data",
-                         Path.home() / "Projects/Athlon/contests/aimo-interp/data") if p]
+    roots = [p for p in (os.environ.get("AIMO_DATA_DIR"), HERE.parent / "data") if p]
     files = [Path(r) / d / "validation-00000-of-00001.parquet" for r in roots
              for d in ("aimo-interp-challenge-sample-full", "val-sample")]
     files = [f for f in files if f.exists()]

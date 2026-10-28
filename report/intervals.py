@@ -7,7 +7,7 @@ chooses the label file every refit reads; a non-default file adds train_file and
 
 Recomputes each method's problem-holdout predictions with the code that produced the reported counts
 (fit_probe.py, sub/calibration.py, fit_trace_probe.py); the hidden-activation probe
-is read from its saved predictions (runs/activation-r3-yuris/probe.json), checks that the counts reproduce and that
+is read from its saved predictions (runs/activation-r3/probe.json), checks that the counts reproduce and that
 every method is scored on the same labelled (model, problem) rows, then reports for each method
 against the majority baseline: correct counts, discordant rows (method right and majority wrong, and
 the reverse), and a 95% interval for the difference in correct rows from 10,000 bootstrap resamples
@@ -75,7 +75,7 @@ def main(root=None, train=None):
     pr = json.loads((root / "runs/trace-pilot/probe.json").read_text())
     expected["trace sensitivity"], expected["trace majority"] = pr["probe"]["correct"], pr["majority"]["correct"]
 
-    act = json.loads((root / "runs/activation-r3-yuris/probe.json").read_text())
+    act = json.loads((root / "runs/activation-r3/probe.json").read_text())
     problems = {p for _, p in methods["majority"]}
     methods["hidden-activation probe"] = activation_keyed(act["predictions"], problems, "probe")
     methods["activation majority"] = activation_keyed(act["predictions"], problems, "majority")

@@ -151,11 +151,11 @@ def activation_row(fa, root, reported, train=None):
     """The activation-probe summary, or None (with a stderr note) when the features folder is not shipped."""
     import pandas as pd
 
-    folder = root / "runs/activation-r3-yuris/features"
+    folder = root / "runs/activation-r3/features"
     if not folder.is_dir():
         print(f"skipping the hidden-activation row: {folder} is missing (needs the GPU feature run)", file=sys.stderr)
         return None
-    act = json.loads((root / "runs/activation-r3-yuris/probe.json").read_text())
+    act = json.loads((root / "runs/activation-r3/probe.json").read_text())
     labels = pd.read_parquet(trainset.resolve(train, root)[0])
     labels = labels[labels.model_id.isin(fa.SMALL) & labels.is_robust.notna()].reset_index(drop=True)
     s, y, groups = activation_scores(fa, folder, act["folds"], labels)

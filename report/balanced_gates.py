@@ -32,7 +32,7 @@ def main(runs):
     out.append(("calibration (nested)", cal["correct"], cal["balanced"]))
     tr = load("trace-pilot/probe.json")["probe"]
     out.append(("trace sensitivity", tr["correct"], tr["balanced"]))
-    act = load("activation-r3-yuris/probe.json")
+    act = load("activation-r3/probe.json")
     rows = act["predictions"]
     truth = [r["truth"] for r in rows]
     bal = balanced(truth, [r["probe"] for r in rows])

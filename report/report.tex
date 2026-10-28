@@ -12,10 +12,10 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{array}
-\hypersetup{pdftitle={Robustness labels follow the problem: six model signals fail on unseen problems, and a text-length control reaches the kit baseline},pdfauthor={},pdfcreator={},pdfproducer={}}
+\hypersetup{pdftitle={Robustness labels follow the problem: six model signals fail on unseen problems, and a text-length control matches the kit baseline},pdfauthor={},pdfcreator={},pdfproducer={}}
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\title{Robustness labels follow the problem: six model signals fail on unseen problems, and a text-length control reaches the kit baseline}
+\title{Robustness labels follow the problem: six model signals fail on unseen problems, and a text-length control matches the kit baseline}
 \author{}
 \begin{document}
 \maketitle
@@ -23,7 +23,7 @@
 
 \begin{abstract}
 
-In the organisers' training labels, robustness belongs to the problem more than to the model: 13 of
+In the organisers' 2026-10-15 training file (11 of 11 at the pinned snapshot), robustness belongs to the problem more than to the model: 13 of
 the 14 problems labelled for several models carry one label for every model, against 4.8 expected
 under a label shuffle (none of 2,000 shuffles reaches 13). A split by row therefore rewards
 recognising problems, and 5 of the 10 public sample problems already have training labels. Holding
@@ -31,10 +31,10 @@ out whole problems, we tested six signals read from the model: prompt-only featu
 difficulty calibration, generation stability, counterfactual trace sensitivity, a hidden-activation
 probe and forced-answer flips. None beat answering ``robust'' everywhere. The four whose gates were
 committed before their results all missed them, and on 34 rows the trace, activation and
-prompt-capability probes have a 95 \% upper bound of zero rows over that baseline. On the organisers'
+prompt-capability probes win no row that baseline loses (34 rows, about 20 problems; a gain of a few rows cannot be ruled out). On the organisers'
 141-row DeepSeek set, four text-length features reach balanced accuracy 0.64 under problem-grouped
-folds, against 0.63 reported for the kit's uncertainty-profiling method. Gates, intervals and code
-are released.
+folds, against 0.63 the kit reports for its uncertainty-profiling method on its own folds (log length alone: 0.70). Gates, intervals and code
+are released in the supplementary ZIP and a public repository.
 \end{abstract}
 
 \section{Summary}
@@ -59,8 +59,8 @@ Skywork-OR1-Math-7B, Olmo-3-7B-Think, DeepSeek-R1-0528-Qwen3-8B).
 
 None of the six signals showed transfer to unseen problems. Calibration came closest at 25/34
 against a majority of 24 (balanced accuracy 0.579, interval \textminus{}2 to +4 rows; \textminus{}1 of 43 on the newer
-file). What the data exclude: the trace, activation and prompt-capability probes have a 95 \% upper
-bound of zero rows over the majority on 34 rows (2, 0 and 0 of 43); calibration's bound is +4 of 34
+file). The trace, activation and prompt-capability probes win no row the majority loses, so no problem resample shows a gain
+on 34 rows (95 \% upper bounds on the newer file: 2, 0 and 0 of 43); calibration's bound is +4 of 34
 but 0 of 43; only the prompt sensitivity and combined arms keep room on both files (+4 and +1, +4
 and +5 rows). Generation stability had no gate and nearly constant agreement features, so it is a
 weak test (Appendix B.2). Results use the 82-row snapshot of \texttt{train-main-v2} (pinned
@@ -76,7 +76,7 @@ result below except the family holdout holds out whole problems (outer folds). F
 is fitted on the outer training rows only. The calibration, trace and activation probes also choose their penalty (and carry
 per-model terms) there; the prompt-only probe uses a fixed C = 1, with no model term. The 34 labelled rows are Qwen3.5-4B 12,
 DeepSeek-R1-0528-Qwen3-8B 10, Olmo-3-7B-Think 9 and Skywork-OR1-Math-7B 3; a family holdout, which leaks problems, is in
-Appendix B.2. Every label comes from the organisers' \texttt{train-main-v2}; Lessons 6, 8 and 9 also read their augmented
+Appendix B.2. Every label comes from the organisers' \texttt{train-main-v2}; Lessons 6, 8 and 9 (Appendix C) also read their augmented
 DeepSeek sets and public sample. Our only labels of our own are a transfer check on the public sample
 (Appendix C), and the organisers retired the rule
 against extra labelled data on 19 September (rules page, read 2026-10-27).
@@ -184,8 +184,7 @@ Post hoc (Appendix B.2), no signal's held-out AUC interval lies above 0.5; calib
   74 \% of those are non-robust (Lesson 6).
 \item
   \textbf{Forcing the final answer does not rescue the answer-level test.} Held out, the flip rule gets
-  18 of 34 train-file rows against a majority of 24, and its AUC differs by label source (0.71
-  against 0.40, difference 0.30 {[}\textminus{}0.01, 0.54{]}; Lesson 8).
+  18 of 34 train-file rows against a majority of 24, and its AUC is 0.71 on the train file and 0.40 on the organisers' set (difference 0.30 {[}\textminus{}0.01, 0.54{]}, not significant and confounded with model; Lesson 8).
 \item
   \textbf{Robustness behaves like a property of the problem} (Lesson 9). Holding out one row instead of
   the whole problem lets a same-problem lookup gain 4 of 34 rows (one problem) and 8 of 43 (three
@@ -197,19 +196,18 @@ Post hoc (Appendix B.2), no signal's held-out AUC interval lies above 0.5; calib
 \textbf{For the next entrant.} Hold out whole problems (a row-split lookup gains up to 8 of 43 rows);
 report balanced accuracy (labels 71 \% robust, public sets about half); check the public sample
 against the training file (5 of its 10 problems carry labels); report a text-length control; give
-answer-level signals more than 4,096 tokens (DeepSeek-R1-0528-Qwen3-8B finished none of 36 samples
-within it; Lesson 7).
+answer-level signals more than 4,096 tokens (10 of 12 Qwen3.5-4B rows gave no final answer within 8,192 tokens, Appendix B.2; Lesson 7 reports a check whose outputs were not kept).
 
 \textbf{A text-length control.} On the organisers' 141-row DeepSeek set (137 problems), a logistic
 regression on four counts of the problem text (log characters, words, digits, \texttt{\$}) reaches balanced
 accuracy 0.644 (0.592 to 0.677 over 20 seeds) under five-fold problem-grouped folds; the 95th
 percentile of its label-shuffle null is 0.592. The kit's uncertainty-profiling README reports 0.626
 on the same rows with its own folds (its accuracy, 0.6879, is 97 of 141), so the comparison is
-indicative. Run once on our 10 DeepSeek rows, that artifact gets 2 of 10, too few to measure (Appendix C).
+indicative. Log character count alone reaches 0.698; always answering non-robust has accuracy 0.745. Run once on our 10 DeepSeek rows, that artifact gets 2 of 10, too few to measure (Appendix C).
 
 \section{Reproduction}
 
-Code, saved features and commands: the supplementary ZIP (the public repository link is withheld for anonymous review), \texttt{supplementary.zip} with \texttt{MANIFEST.sha256}, under Apache-2.0. \texttt{REPRODUCE.md} recomputes
+Code, saved features and commands: the supplementary ZIP (the same files, with the authors' names, are in a public repository whose link went to the organisers for the compliance check and is withheld here for anonymous review), \texttt{supplementary.zip} with \texttt{MANIFEST.sha256}, under Apache-2.0. \texttt{REPRODUCE.md} recomputes
 Sections 1 to 4 on a CPU in about seven minutes on two CPU threads from the saved features and the data files of Appendix D. The scored
 entries are the v3 uploads of 2026-10-27, a per-configuration prior fitted on the training file alone whose posteriors all
 exceed 0.5, so both answer ``robust'' for every problem, the decision these results support (Appendix A). Our v1 entries of 2026-10-19 picked the configurations to call robust from ten single-configuration public-board
@@ -228,7 +226,7 @@ and Narayanan, 2023; Rosenblatt et al., 2024); our repeated problems are such su
 
 Generation stability (12 rows) and forced-answer flips (86 rows) were scored on their own row sets,
 not in the Section 4 table. The 34-row sample gives about 20 independent problems. Local models
-are a proxy for the official deployments (Lesson 4). No white-box ablation was run, so the entry makes no White-Box claim. The Olmo-3-7B-Think forced-answer run was stopped (Appendix B.1). No signal was tested for transfer without problem leakage: the family holdout shares problems, and neither the main track nor the public sample was scored with any of the six signals. Calibration's interval on 34 rows leaves a true gain of up to four rows (12 points) unexcluded.
+are a proxy for the official deployments (Lesson 4). No white-box ablation was run, so the entry makes no White-Box claim. The Olmo-3-7B-Think forced-answer run was stopped (Appendix B.1). No signal was tested across model families without shared problems, and neither the main track nor the public sample was scored with any of the six signals. Calibration's interval on 34 rows leaves a true gain of up to four rows (12 points) unexcluded. We built no extra labels, although the organisers allowed them from 19 September.
 
 \section*{AI Use Statement}
 
@@ -344,7 +342,7 @@ small & \texttt{470ceba57ca85278} & 43 & 0.721 & ``robust'' everywhere \\
 
 Every configuration's posterior is at least 0.5, so both entries make the same predictions as the
 constant baselines; a configuration missing from the training file takes the global rate. The prior
-is refitted with \path{entry/fit_training_prior.py\ -\/-train\ data/train-main-v2/train-2026-10-15.parquet\ -\/-pinned\ data/train-main-v2/train-00000-of-00001.parquet} (REPRODUCE.md section 6). The v2 hybrids
+is refitted with \path{entry/fit_training_prior.py} (command in REPRODUCE.md section 6). The v2 hybrids
 were built and not uploaded. \texttt{entry/build.sh\ v3} fixes the file timestamps and the file
 order, so two builds give the same bytes (\texttt{entry/test\_entry\_v3.py}, line 175).
 
@@ -564,7 +562,7 @@ captured, and activations are released per problem.
   DeepSeek-R1-0528-Qwen3-8B 10; 34 rows, 24 robust) plus the 52 DeepSeek rows of the organisers'
   aggregated set \texttt{augmented-sample-math-agg-filtered} (11 robust); four samples per variant at
   2,048 tokens, Skywork and DeepSeek with FP8 weights. Under the same problem-held-out protocol
-  the best rule reached 52/86 against a majority of 51/86, short of the gate.
+  the best rule reached 52/86 against a majority of 51/86, short of the gate. This rule is fitted on all 86 rows; refitted per source it gets 59, against 65 for a majority taken per source.
 
   The sign of the signal differs between the two row sets, and the data do not tell label source
   from model apart: the two sets share no model except DeepSeek, and the DeepSeek train-file rows
@@ -656,7 +654,7 @@ features that do not exist for these problems (a GPU run), so it was not tested 
 
 \section{Reproduction details}
 
-Code, saved features and exact commands: the supplementary ZIP (the public repository link is withheld for anonymous review), \texttt{supplementary.zip} with \texttt{MANIFEST.sha256}, released under Apache-2.0 (\texttt{LICENSE} in the tree).
+Code, saved features and exact commands: the supplementary ZIP (the same files, with the authors' names, are in a public repository whose link went to the organisers for the compliance check and is withheld here for anonymous review), \texttt{supplementary.zip} with \texttt{MANIFEST.sha256}, released under Apache-2.0 (\texttt{LICENSE} in the tree).
 \texttt{REPRODUCE.md} recomputes the numbers in Sections 1 to 4 on a CPU in about seven minutes on two CPU threads from the
 saved features and the data files below, and lists the data file, script and run folder behind each section; regenerating the
 hidden-activation features needs a GPU. Data, all Hugging Face datasets of the organisation \texttt{aimo-interp}, none redistributed:
@@ -690,8 +688,8 @@ hidden-activation features needs a GPU. Data, all Hugging Face datasets of the o
 \end{itemize}
 
 The v1 uploads, replaced by the v3 entries on 2026-10-27, and their scores (Appendix A; board position on 2026-10-19): \texttt{small-groups-v1}
-(static groups, no artifact) scored 0.64, rank 29 of 60 on the small task; \texttt{main-hybrid-v1} scored
-0.57, rank 22 of 47 on the main task; \texttt{small-hybrid-v1} scored 0.57. The hybrids run the organisers' artifact for DeepSeek; none of the three uses a signal tested here. The v2 bundles were built and not
+(static groups, no artifact) scored 0.64; \texttt{main-hybrid-v1} scored
+0.57; \texttt{small-hybrid-v1} scored 0.57. The hybrids run the organisers' artifact for DeepSeek; none of the three uses a signal tested here. The v2 bundles were built and not
 uploaded. Codabench IDs of the v1 uploads are in Appendix A. The leaderboard lists eight probe rows, IDs 1000868, 1000873, 1000876, 1000878, 1000884, 1000887, 1000891 and 1000892; \texttt{REPRODUCE.md} lists the zip hashes of the nine kept. Appendix A
 describes the shipped v3 bundle (main id 1014009, score 0.48; small id 1014010, score 0.50).
 \end{document}

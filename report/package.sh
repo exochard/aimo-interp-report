@@ -44,7 +44,7 @@ grep -qF '⟦' "$lane/report/report.tex" && { echo "report/report.tex still has 
 [ "$lane/report/report.pdf" -nt "$lane/report/report.tex" ] || { echo "report/report.pdf is missing or older than report/report.tex: run report/build_pdf.sh"; exit 1; }
 runs=(runs/feat/features.jsonl runs/feat/meta.json runs/probe-gate.json runs/probe.json
       runs/calibration-nested/report.json runs/trace-pilot/rows.jsonl runs/trace-pilot/probe.json
-      runs/agreement-vs-labels.csv runs/agreement-vs-labels.json runs/activation-r3-yuris/probe.json
+      runs/agreement-vs-labels.csv runs/agreement-vs-labels.json runs/activation-r3/probe.json
       runs/force-r4/Qwen3.5-4B.jsonl runs/force-r4/Skywork-OR1-Math-7B.jsonl
       runs/force-r4/DeepSeek-R1-0528-Qwen3-8B.jsonl runs/force-r4/eval-3models.json
       runs/artifact-gate/features.jsonl runs/artifact-gate/manifest.json runs/artifact-gate/score.json)
@@ -53,6 +53,8 @@ for f in "${runs[@]}"; do
 done
 mkdir -p "$out/$name"
 git -C "$repo" archive HEAD "$rel" | tar -x -C "$out/$name" --strip-components=$(($(tr -cd / <<<"$rel" | wc -c) + 1))
+# Internal files that do not ship.
+rm -f "$out/$name/queue_activation_r3.sh" "$out/$name/report/review-checklist.md"
 for f in "${runs[@]}"; do
   mkdir -p "$out/$name/$(dirname "$f")" && cp "$lane/$f" "$out/$name/$f"
 done
