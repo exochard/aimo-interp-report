@@ -55,6 +55,8 @@ mkdir -p "$out/$name"
 git -C "$repo" archive HEAD "$rel" | tar -x -C "$out/$name" --strip-components=$(($(tr -cd / <<<"$rel" | wc -c) + 1))
 # Internal files that do not ship.
 rm -f "$out/$name/queue_activation_r3.sh" "$out/$name/report/review-checklist.md"
+rm -rf "$out/$name/analysis" "$out/$name/review"  # portfolio notes quote problem text; review/ drafted our peer reviews
+rm -f "$out/$name/plan-2026-10-27.md" "$out/$name/report/mail-2026-10-24-openreview.txt" "$out/$name/report/revision-2026-11-21.md"  # internal notes
 for f in "${runs[@]}"; do
   mkdir -p "$out/$name/$(dirname "$f")" && cp "$lane/$f" "$out/$name/$f"
 done
